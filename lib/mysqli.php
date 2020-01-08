@@ -3,14 +3,20 @@ require_once 'pwd/pwd.php';
 
 function GetConnection()
 {
+    //Informatie database
     $host = '127.0.0.1';
     $user = 'root';
     $pwd = PwD();
     $db = 'datetime';
+
+    //Nieuwe connectie
     $mysqli = new mysqli($host, $user, $pwd, $db);
+
+    //Error weergeven als er iets fout gaat
     if ($mysqli->connect_errno) {
         echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
     } else {
+        //Als connectie gemaakt is, deze returnen
         return $mysqli;
     }
 }
@@ -28,13 +34,12 @@ function resultToArray($result)
 function GetData($sql)
 {
 
-    //connect to mysqli database (Host/Username/Password)
     $connection = GetConnection();
 
-    $sqli = mysqli_query($connection, "$sql");
-
+    //Data ophalen uit databank
     $result = $connection -> query("SELECT * FROM gebruiker");
 
+    //Resultaten in associative array zetten
     $rows = resultToArray($result);
 
     return $rows;
