@@ -37,7 +37,7 @@ function GetData($sql)
     $connection = GetConnection();
 
     //Data ophalen uit databank
-    $result = $connection -> query("SELECT * FROM gebruiker");
+    $result = $connection -> query($sql);
 
     //Resultaten in associative array zetten
     $rows = resultToArray($result);
